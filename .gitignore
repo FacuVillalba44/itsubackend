@@ -33,3 +33,7 @@ build/
 .vscode/
 ### idx ###
 .idx
+.idx/.data/mysql/#innodb_redo/#ib_redo6
+
+.idx/.data/mysql/#ib_16384_0.dblwr
+.idx/.data/mysql/binlog.index
