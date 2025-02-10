@@ -12,14 +12,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @SuppressWarnings("unused")
 @RestController
 
-//context-path = http://localhost:8080/itsuapi/ <- se vería así el url de la api
+// context-path = http://localhost:8080/itsuapi/ <- se vería así el url de la
+// api
 @RequestMapping("/itsuapi")
-//Puerto desde donde recibira las peticiones del front
+// Puerto desde donde recibira las peticiones del front
 @CrossOrigin(origins = "https://4200-idx-itsufront-1737645545390.cluster-vpxjqdstfzgs6qeiaf7rdlsqrc.cloudworkstations.dev")
 
 public class AlumnoControlador {
@@ -28,13 +31,21 @@ public class AlumnoControlador {
     @Autowired
     private AlumnoServicio alumnoServicio;
 
-    //url donde se conectara es http://localhost:8080/api-itsu/alumnos    
-    @GetMapping("/alumnos")
-    public  List<Alumno> obtenerAlumnos(){
-        List <Alumno> alumnos= this.alumnoServicio.listarAlumnos();
+    // url donde se conectara es http://localhost:8080/api-itsu/alumnos
+    @GetMapping("/alumnos") //metodo para listar los alumnos
+    public List<Alumno> obtenerAlumnos() {
+        List<Alumno> alumnos = this.alumnoServicio.listarAlumnos();
         logger.info("Obteniendo la lista de alumnos");
         alumnos.forEach(alumno -> logger.info(alumno.toString()));
         return alumnos;
+    }
+
+    @PostMapping("/alumnos")
+    public Alumno agregarAlumno(@RequestBody Alumno alumno){
+        logger.info("alumno a agregar:"+alumno);
+        return this.alumnoServicio.guardarAlumno(alumno);
+   
+        
     }
 
 }

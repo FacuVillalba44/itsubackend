@@ -30,11 +30,11 @@ public class AlumnoServicio implements IAlumnoServicio {
     }
 
     @Override
-    public void guardarAlumno(Alumno alumno) {
+    public Alumno guardarAlumno(Alumno alumno) {
         // si no existe el id en la bd ingresa un nuevo registro, si existe, lo actualiza
-        this.alumnoRepositorio.save(alumno);
+        return this.alumnoRepositorio.save(alumno);
     }
-
+ 
     @Override
     public void eliminarAlumno(Integer idAlumno) {
     
